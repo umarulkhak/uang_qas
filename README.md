@@ -1,16 +1,44 @@
-# uang_qas
+# 💰 UangQas
 
-A new Flutter project.
+Aplikasi **Manajemen Uang Kas Kelas (Offline)** dibuat dengan **Flutter** dan **SQLite**.  
+Dikembangkan oleh **Umar Ulkhak** — untuk membantu bendahara kelas memantau pembayaran uang kas, mencatat pembayaran siswa, dan melihat total kas dengan cepat tanpa koneksi internet.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🧠 Fitur Utama
 
-A few resources to get you started if this is your first Flutter project:
+✅ **Autentikasi Offline**
+- Login & register bendahara hanya sekali (disimpan lokal)
+- Password terenkripsi menggunakan SHA-256 + salt
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+✅ **Manajemen Siswa**
+- Tambah, lihat, dan kelola daftar siswa
+- Total uang kas tiap siswa terhitung otomatis
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+✅ **Catatan Pembayaran**
+- Tambah pembayaran untuk setiap siswa
+- Tampilkan histori dan jumlah kali pembayaran
+- Total kas keseluruhan dihitung otomatis
+
+✅ **Database Offline (SQLite)**
+- Semua data tersimpan aman di perangkat
+- Tidak butuh koneksi internet
+
+✅ **UI/UX Profesional**
+- Tema utama **Navy + Gold**
+- Desain simpel, rapi, dan mudah digunakan
+
+---
+
+## 🧱 Teknologi yang Digunakan
+
+| Komponen | Deskripsi |
+|-----------|------------|
+| **Flutter** | Framework utama untuk UI cross-platform |
+| **SQLite (sqflite)** | Penyimpanan data lokal |
+| **Shared Preferences** | Menyimpan sesi login |
+| **Path Provider & Path** | Lokasi database |
+| **Crypto** | Hash password (SHA-256) |
+| **Intl** | Format tanggal pembayaran |
+
+---
