@@ -1,32 +1,37 @@
-# 💰 UangQas
+# 💰 UangQas - Aplikasi Manajemen Kas Sekolah Modern
 
-Aplikasi **Manajemen Uang Kas Kelas (Offline)** dibuat dengan **Flutter** dan **SQLite**.  
-Dikembangkan oleh **Umar Ulkhak** — untuk membantu bendahara kelas memantau pembayaran uang kas, mencatat pembayaran siswa, dan melihat total kas dengan cepat tanpa koneksi internet.
+Aplikasi **Manajemen Uang Kas Sekolah (Offline)** ini dibangun dengan **Flutter** dan **SQLite**, dirancang untuk membantu bendahara sekolah mengelola keuangan kas dengan efisien, cepat, dan tanpa memerlukan koneksi internet. Dengan antarmuka yang canggih dan elegan, UangQas mempermudah pencatatan pembayaran siswa, pemantauan total kas per kelas, dan pengelolaan data siswa serta kelas secara keseluruhan.
 
 ---
 
 ## 🧠 Fitur Utama
 
-✅ **Autentikasi Offline**
-- Login & register bendahara hanya sekali (disimpan lokal)
-- Password terenkripsi menggunakan SHA-256 + salt
+✅ **Autentikasi & Keamanan Offline**
+- Login & registrasi bendahara aman (disimpan lokal)
+- Password terenkripsi kuat menggunakan SHA-256 + salt
+- **Fitur Reset Akun**: Opsi untuk menghapus semua data dan memulai kembali jika lupa detail login (dengan konfirmasi keamanan).
 
-✅ **Manajemen Siswa**
-- Tambah, lihat, dan kelola daftar siswa
-- Total uang kas tiap siswa terhitung otomatis
+✅ **Manajemen Kelas Komprehensif**
+- Tambah, lihat, dan kelola daftar kelas di sekolah.
+- Setiap kelas memiliki total uang kasnya sendiri yang terhitung otomatis.
 
-✅ **Catatan Pembayaran**
-- Tambah pembayaran untuk setiap siswa
-- Tampilkan histori dan jumlah kali pembayaran
-- Total kas keseluruhan dihitung otomatis
+✅ **Manajemen Siswa Efisien**
+- Tambah, lihat, dan kelola daftar siswa yang terkait dengan masing-masing kelas.
+- Total uang kas yang dibayarkan setiap siswa terhitung otomatis dan terintegrasi dengan kelasnya.
 
-✅ **Database Offline (SQLite)**
-- Semua data tersimpan aman di perangkat
-- Tidak butuh koneksi internet
+✅ **Catatan Pembayaran Detail**
+- Tambah pembayaran dengan mudah untuk setiap siswa.
+- Tampilkan riwayat pembayaran lengkap dan jumlah kali pembayaran yang telah dilakukan.
+- Total kas keseluruhan per kelas dan total kas sekolah dihitung secara otomatis.
 
-✅ **UI/UX Profesional**
-- Tema utama **Navy + Gold**
-- Desain simpel, rapi, dan mudah digunakan
+✅ **Database Offline Lokal (SQLite)**
+- Semua data tersimpan aman di perangkat pengguna.
+- Tidak memerlukan koneksi internet untuk menjalankan aplikasi dan mengelola data.
+
+✅ **UI/UX Canggih & Elegan**
+- Tema utama yang konsisten: **Navy, Gold, dan Green**, terinspirasi dari logo aplikasi.
+- Desain antarmuka yang modern, bersih, intuitif, dan mudah digunakan.
+- Penggunaan **Google Fonts (Poppins)** untuk tipografi yang profesional.
 
 ---
 
@@ -34,11 +39,12 @@ Dikembangkan oleh **Umar Ulkhak** — untuk membantu bendahara kelas memantau pe
 
 | Komponen | Deskripsi |
 |-----------|------------|
-| **Flutter** | Framework utama untuk UI cross-platform |
-| **SQLite (sqflite)** | Penyimpanan data lokal |
-| **Shared Preferences** | Menyimpan sesi login |
-| **Path Provider & Path** | Lokasi database |
-| **Crypto** | Hash password (SHA-256) |
-| **Intl** | Format tanggal pembayaran |
+| **Flutter** | Framework utama untuk membangun UI cross-platform yang indah dan berperforma tinggi. |
+| **SQLite (sqflite)** | Penyimpanan data lokal yang aman dan efisien. |
+| **Shared Preferences** | Menyimpan sesi login dan konfigurasi aplikasi lokal. |
+| **Path Provider & Path** | Mengelola lokasi database di perangkat. |
+| **Crypto** | Library untuk hashing password (SHA-256) guna keamanan data. |
+| **Intl** | Internasionalisasi dan format tanggal/waktu yang fleksibel. |
+| **Google Fonts** | Mengintegrasikan font kustom (Poppins) untuk tampilan UI yang lebih menarik. |
 
 ---

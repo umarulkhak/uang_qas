@@ -10,7 +10,8 @@ import '../../db/database_helper.dart';
 import '../../models/siswa_model.dart';
 
 class TambahSiswaPage extends StatefulWidget {
-  const TambahSiswaPage({super.key});
+  final int idKelas;
+  const TambahSiswaPage({super.key, required this.idKelas});
   @override
   State<TambahSiswaPage> createState() => _TambahSiswaPageState();
 }
@@ -37,8 +38,10 @@ class _TambahSiswaPageState extends State<TambahSiswaPage> {
   Future<void> _save() async {
     final name = _ctrl.text.trim();
     if (name.isEmpty) return;
-    final s = Siswa(nama: name, totalBayar: 0);
+    final s = Siswa(nama: name, totalBayar: 0, idKelas: widget.idKelas);
     await db.insertSiswa(s);
-    Navigator.pop(context);
+    if (mounted) { // Changed context.mounted to mounted
+      Navigator.pop(context);
+    }
   }
 }

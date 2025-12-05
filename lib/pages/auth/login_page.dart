@@ -7,9 +7,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uang_qas/pages/kelas/kelas_list_page.dart';
 import '../../db/database_helper.dart';
 import '../../utils/security.dart';
-import '../home_page.dart';
+import 'register_page.dart'; // Import RegisterPage untuk navigasi reset
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -28,6 +29,9 @@ class _LoginPageState extends State<LoginPage> {
     final username = _uC.text.trim();
     final pass = _pC.text;
     final user = await db.getUserByUsername(username);
+
+    if (!mounted) return;
+
     if (user == null) {
       _showErr('User tidak ditemukan');
       return;
@@ -39,13 +43,48 @@ class _LoginPageState extends State<LoginPage> {
     }
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('logged_username', username);
-    setState(() => _loading = false);
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const HomePage()));
+    
+    if (!mounted) return;
+    
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const KelasListPage()));
+  }
+
+  Future<void> _resetAccount() async {
+    // Tampilkan dialog konfirmasi
+    final bool? confirm = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Reset Akun'),
+        content: const Text('Apakah Anda yakin ingin mereset akun? Semua data (pengguna, kelas, siswa, pembayaran) akan dihapus secara permanen.'),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Batal')),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx, true), 
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+            child: const Text('Reset', style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+    );
+
+    if (confirm == true) {
+      // Bersihkan SharedPreferences
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.clear(); // Hapus semua data preferensi, termasuk logged_username
+
+      await db.resetAllData();
+      if (mounted) {
+        // Navigasi ke RegisterPage setelah reset
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const RegisterPage()));
+      }
+    }
   }
 
   void _showErr(String msg) {
     setState(() => _loading = false);
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
+    if(mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
+    }
   }
 
   @override
@@ -56,11 +95,25 @@ class _LoginPageState extends State<LoginPage> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
+            Image.asset(
+              'assets/images/logo.png', 
+              height: 120,
+            ),
+            const SizedBox(height: 24),
             TextField(controller: _uC, decoration: const InputDecoration(labelText: 'Username')),
             const SizedBox(height: 12),
             TextField(controller: _pC, decoration: const InputDecoration(labelText: 'Password'), obscureText: true),
             const SizedBox(height: 16),
-            _loading ? const CircularProgressIndicator() : ElevatedButton(onPressed: _login, child: const Text('Login'))
+            _loading ? const CircularProgressIndicator() : ElevatedButton(onPressed: _login, child: const Text('Login')),
+            const SizedBox(height: 20), // Spasi antara tombol login dan reset
+            ElevatedButton.icon(
+              onPressed: _resetAccount,
+              icon: const Icon(Icons.warning_rounded, color: Colors.white),
+              label: const Text('Reset Akun (Hapus Semua Data)', style: TextStyle(color: Colors.white)),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.redAccent, 
+              ),
+            ),
           ],
         ),
       ),
