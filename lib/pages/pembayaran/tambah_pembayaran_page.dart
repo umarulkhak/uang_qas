@@ -45,6 +45,9 @@ class _TambahPembayaranPageState extends State<TambahPembayaranPage> {
     final tanggal = DateFormat('dd/MM/yyyy HH:mm').format(DateTime.now());
     final p = Pembayaran(idSiswa: widget.idSiswa, tanggal: tanggal, nominal: nominal);
     await db.insertPembayaran(p);
+    
+    if(!mounted) return; // Mengganti context.mounted dengan mounted
+
     setState(() => _loading = false);
     Navigator.pop(context);
   }

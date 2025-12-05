@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import '../../db/database_helper.dart';
 import 'login_page.dart';
 import 'register_page.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // Import SharedPreferences
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -27,6 +28,9 @@ class _SplashPageState extends State<SplashPage> {
 
   Future<void> _checkFirst() async {
     final count = await db.getUserCount();
+    
+    if (!mounted) return;
+
     if (count == 0) {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const RegisterPage()));
     } else {

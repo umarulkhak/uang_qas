@@ -11,6 +11,7 @@ class User {
   final String passwordHash;
   final String salt;
   final String role;
+  final int? idKelas;
 
   User({
     this.id,
@@ -18,6 +19,7 @@ class User {
     required this.passwordHash,
     required this.salt,
     required this.role,
+    this.idKelas,
   });
 
   Map<String, dynamic> toMap() => {
@@ -26,6 +28,7 @@ class User {
     'password_hash': passwordHash,
     'salt': salt,
     'role': role,
+    'id_kelas': idKelas,
   };
 
   factory User.fromMap(Map<String, dynamic> m) => User(
@@ -34,5 +37,6 @@ class User {
     passwordHash: m['password_hash'],
     salt: m['salt'],
     role: m['role'],
+    idKelas: m['id_kelas'],
   );
 }

@@ -66,9 +66,14 @@ class _RegisterPageState extends State<RegisterPage> {
     final password = _passC.text;
 
     final existing = await db.getUserByUsername(username);
+
+    if (!mounted) return;
+
     if (existing != null) {
       setState(() => _loading = false);
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Username sudah digunakan')));
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Username sudah digunakan')));
+      }
       return;
     }
 
@@ -81,7 +86,9 @@ class _RegisterPageState extends State<RegisterPage> {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('logged_username', username);
 
-    setState(() => _loading = false);
+    if (!mounted) return;
+
+    // setState(() => _loading = false); // Hapus setState ini karena halaman akan diganti
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const LoginPage()));
   }
 }
